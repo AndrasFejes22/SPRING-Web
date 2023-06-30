@@ -21,10 +21,11 @@ public class UserController {
     }
 
     // get all users:
+    @RequestMapping("/users")
     public String getAllUsers(Model model){
         List<User> users = userService.getUsers();
         model.addAttribute("users", users);
-        return "users";
+        return "users.html";
     }
 
 

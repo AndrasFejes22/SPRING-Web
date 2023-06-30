@@ -43,7 +43,7 @@ public class JpaConfiguration {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setDataSource(dataSource);
-        factory.setPackagesToScan("hu.bearmaster.springtutorial.web");
+        factory.setPackagesToScan("web");
         factory.setJpaPropertyMap(Map.of("hibernate.format_sql", false));
         return factory;
     }
