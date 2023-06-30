@@ -10,8 +10,10 @@ import org.springframework.web.servlet.view.BeanNameViewResolver;
 @ComponentScan(basePackages = "web")
 public class WebConfig {
 
+    /*
     @Bean
     public ViewResolver myViewResolver() {
         return new BeanNameViewResolver();
     }
+    */
 }

@@ -17,6 +17,6 @@ public class UserService {
     }
 
     public User getUser(String name) {
-        return new User(Optional.ofNullable(name).orElse("John Doe"));
+        return new User(Optional.ofNullable(name).orElse("John Doe")); //ez nem megy így
     }
 }

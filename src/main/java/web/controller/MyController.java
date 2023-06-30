@@ -21,7 +21,8 @@ public class MyController {
     public String getUser(@RequestParam(required = false) String name, Model model) { // igy az alap John Doe lesz
     //public String getUser(@RequestParam(required = true) String name, Model model) { //http://localhost:8080/SPRING-Web/hello?name=Andris**
         model.addAttribute("user", userService.getUser(name));
-        return "myView";
+        //return "myView";
+        return "hello.html"; //thymeleaf
     }
     //** HTTP ERROR 400 Required parameter 'name' is not present. Igy a hello után muszáj neki nevet adni!
 }
