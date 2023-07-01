@@ -4,6 +4,7 @@ import web.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import web.model.request.CreateUserRequest;
 import web.repository.UserRepository;
 
 import java.time.ZonedDateTime;
@@ -29,7 +30,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    /*
+
     public User createUser(CreateUserRequest request) {
         User user = new User();
         user.setUsername(request.getUsername());
@@ -40,5 +41,5 @@ public class UserService {
         return userRepository.save(user);
     }
 
-     */
+
 }

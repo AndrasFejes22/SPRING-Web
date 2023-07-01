@@ -46,6 +46,12 @@ public class UserController {
         return "add_user";
     }
 
+    @RequestMapping("/user")
+    public String addUser(CreateUserRequest request) {
+        User createdUser = userService.createUser(request);
+        return "redirect:/SPRING-Web/user/" + createdUser.getId();
+    }
+
 
 
 
