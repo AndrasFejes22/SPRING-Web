@@ -9,13 +9,13 @@
     Nincs ilyen felhasználó!
 </div>
 <div th:if="${user} != null">
-    <div>Név: <span th:text="${user.username}">John Doe</span></div>
+    <div>Név: <span th:text="${user.username}">Jane Doe</span></div>
     <div>Státusz: <span th:text="${user.status}">ACTIVE</span></div>
     <div>Létrehozva: <span th:text="${#temporals.format(user.createdAt, 'yyyy. MMMM dd. HH:mm')}">2023. május 1. 16:48</span></div>
 </div>
 
 <a href="users.html"
-   th:href="@{/spring-web/users}">Vissza</a>
+   th:href="@{/SPRING-Web/users}">Vissza</a>
 
 </body>
 </html>

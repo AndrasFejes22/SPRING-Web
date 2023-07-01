@@ -4,7 +4,7 @@
     <title>Felhasználó lista</title>
     <style>
             table {
-                border-spacing: 0px;
+                border-spacing: 10px;
             }
             .highlight {
                 background-color: lightgray;
@@ -23,19 +23,19 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="user : ${users}" th:class="${highlighted == user.id} ? 'highlight'">
+    <tr th:each="user : ${users}">
         <td>
             <a href="user.html"
                th:text="${user.id}"
-               th:href="@{/spring-web/user/{id}(id=${user.id})}">0</a>
+               th:href="@{/SPRING-Web/user/{id}(id=${user.id})}">0</a>
         </td>
-        <td th:text="${user.username}">John Doe</td>
+        <td th:text="${user.username}">Jane Doe</td>
         <td th:text="${user.status}">ACTIVE</td>
         <td th:text="${#temporals.format(user.createdAt, 'yyyy. MMMM dd. HH:mm')}">2023. május 1. 16:48</td>
     </tr>
     </tbody>
 </table>
 <a href="add_user.html"
-   th:href="@{/spring-web/addUser}">Új felhasználó</a>
+   th:href="@{/SPRING-Web/addUser}">Új felhasználó</a>
 </body>
 </html>

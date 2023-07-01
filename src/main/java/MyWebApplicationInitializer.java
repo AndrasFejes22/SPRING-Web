@@ -21,5 +21,6 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
         registration.addMapping("/SPRING-Web/*");
 
         //localhost:8080/SPRING-Web/hello
+        //localhost:8080/SPRING-Web/user?id=10
     }
 }

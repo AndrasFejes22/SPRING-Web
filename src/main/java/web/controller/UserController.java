@@ -1,9 +1,11 @@
 package web.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import web.model.User;
@@ -25,8 +27,19 @@ public class UserController {
     public String getAllUsers(Model model){
         List<User> users = userService.getUsers();
         model.addAttribute("users", users);
-        return "users.html";
+        return "users";
     }
+
+    // get user by ID:
+    @RequestMapping("/user/{id}")
+    public String getUserById(Model model, @PathVariable long id){
+        //String id = request.getParameter("id");
+        User user = userService.getUserById(id).orElse(null);
+        model.addAttribute("user", user);
+        return "user";
+    }
+
+
 
 
 
