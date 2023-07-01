@@ -1,14 +1,15 @@
 package web.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
+
+import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import web.model.request.CreateUserRequest;
 import org.springframework.ui.Model;
-
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import web.model.User;
+import web.model.request.CreateUserRequest;
 import web.service.UserService;
 
 import java.util.List;
@@ -32,11 +33,17 @@ public class UserController {
 
     // get user by ID:
     @RequestMapping("/user/{id}")
+    //@RequestMapping("/user")
     public String getUserById(Model model, @PathVariable long id){
-        //String id = request.getParameter("id");
         User user = userService.getUserById(id).orElse(null);
         model.addAttribute("user", user);
         return "user";
+    }
+
+    @RequestMapping("/addUser")
+    public String addUserPage(Model model) {
+        model.addAttribute("user", new CreateUserRequest());
+        return "add_user";
     }
 
 
