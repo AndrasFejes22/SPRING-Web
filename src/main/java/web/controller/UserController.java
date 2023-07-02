@@ -1,6 +1,8 @@
 package web.controller;
 
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,14 +26,16 @@ public class UserController {
     }
 
     // get all users:
-    @RequestMapping("/users")
-    public String getAllUsers(Model model){
+    @GetMapping("/users")
+    public String getAllUsers(Model model, @CookieValue(required = false) Long visitedUserId ){
         List<User> users = userService.getUsers();
         model.addAttribute("users", users);
+        model.addAttribute("highlighted", visitedUserId);
         return "users";
     }
 
     // get user by ID:
+    /*
     @RequestMapping("/user/{id}")
     //@RequestMapping("/user")
     public String getUserById(Model model, @PathVariable long id){
@@ -39,6 +43,31 @@ public class UserController {
         model.addAttribute("user", user);
         return "user";
     }
+
+     */
+
+
+    // get user by ID_2: (highlighted stuff)
+    @GetMapping("/user/{id}")
+    public String getUserById(Model model, @PathVariable long id, HttpServletResponse response){
+        User user = userService.getUserById(id).orElse(null);
+        model.addAttribute("user", user);
+
+        if(user != null){
+            Cookie visitedUserIdCookie = createVisitedUserIdCookie(user.getId());
+            response.addCookie(visitedUserIdCookie);
+        }
+        return "user";
+    }
+
+    private Cookie createVisitedUserIdCookie(Long userId){
+        Cookie cookie = new Cookie("visitedUserId", userId.toString());
+        cookie.setPath("/SPRING-Web/");
+        //cookie.setDomain("localhost");
+        return cookie;
+    }
+
+
 
     @RequestMapping("/addUser")
     public String addUserPage(Model model) {
