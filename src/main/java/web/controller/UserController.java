@@ -21,16 +21,20 @@ public class UserController {
 
     private final UserService userService;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    // get all users:
+    // get all users:(session stuff)
     @GetMapping("/users")
-    public String getAllUsers(Model model, @CookieValue(required = false) Long visitedUserId ){
+    public String getAllUsers(Model model, @SessionAttribute(required = false) Long visitedUserId,
+                              @SessionAttribute(required = false) User latestUser) {
         List<User> users = userService.getUsers();
         model.addAttribute("users", users);
         model.addAttribute("highlighted", visitedUserId);
+        LOGGER.info("Latest created user: {}", latestUser);
         return "users";
     }
 
@@ -47,16 +51,16 @@ public class UserController {
      */
 
 
-    // get user by ID_2: (highlighted stuff)
+    // get user by ID_3: (session stuff)
     @GetMapping("/user/{id}")
-    public String getUserById(Model model, @PathVariable long id, HttpServletResponse response){
+    public String getUserById(Model model, @PathVariable long id, HttpSession session) {
         User user = userService.getUserById(id).orElse(null);
         model.addAttribute("user", user);
 
-        if(user != null){
-            Cookie visitedUserIdCookie = createVisitedUserIdCookie(user.getId());
-            response.addCookie(visitedUserIdCookie);
+        if (user != null) {
+            session.setAttribute("visitedUserId", user.getId());
         }
+
         return "user";
     }
 
