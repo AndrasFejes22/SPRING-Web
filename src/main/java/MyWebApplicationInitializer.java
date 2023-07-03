@@ -20,9 +20,12 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
         registration.setLoadOnStartup(1);
         registration.addMapping("/SPRING-Web/*");
 
-        //localhost:8080/SPRING-Web/hello
-        //localhost:8080/SPRING-Web/users
 
-        //localhost:8080/SPRING-Web/user?id=10
+
+        /*
+        FilterRegistration.Dynamic filterRegistration
+                = servletContext.addFilter("webContextFilter", new RequestContextFilter());
+        filterRegistration.addMappingForServletNames(null, false, "spring-web");
+         */
     }
 }
