@@ -2,29 +2,34 @@ package web.controller;
 
 
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import web.model.UserContext;
 import web.model.request.CreateUserRequest;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
-import web.model.request.CreateUserRequest;
 import web.service.UserService;
 
 import java.util.List;
+
+//localhost:8080/SPRING-Web/hello
+//localhost:8080/SPRING-Web/users
+
+//localhost:8080/SPRING-Web/user?id=10
 
 @Controller
 public class UserController {
 
     private final UserService userService;
-
+    private final UserContext userContext;
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserContext userContext) {
         this.userService = userService;
+        this.userContext = userContext;
     }
 
     // get all users:(session stuff)
@@ -35,6 +40,8 @@ public class UserController {
         model.addAttribute("users", users);
         model.addAttribute("highlighted", visitedUserId);
         LOGGER.info("Latest created user: {}", latestUser);
+        LOGGER.info("User context: {}", userContext);
+        LOGGER.info("Current user: {}", userContext.getCurrentUser());
         return "users";
     }
 
