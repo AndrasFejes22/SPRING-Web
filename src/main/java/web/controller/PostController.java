@@ -17,7 +17,7 @@ public class PostController {
     }
 
     //@GetMapping(value = "/post")
-    @ResponseBody
+    //@ResponseBody
     @GetMapping(value = "/post/{id}")
     public Post getPostById(@PathVariable long id) {
         Post post = postService.getPostById(id).orElse(null);
