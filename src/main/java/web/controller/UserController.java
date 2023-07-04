@@ -19,6 +19,7 @@ import java.util.List;
 //localhost:8080/SPRING-Web/users
 
 //localhost:8080/SPRING-Web/user?id=10
+//localhost:8080/SPRING-Web/post?id=10
 //http://localhost:8080/SPRING-Web/users?userId=10 --> ez csak beállítja a current usert
 
 @Controller
